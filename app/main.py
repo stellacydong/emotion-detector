@@ -5,24 +5,21 @@ from utils import get_base_url, allowed_file, and_syntax
 
 from model import *  #(jimmy python program)
 
-
 # setup the webservver
-port = 12123
-base_url = get_base_url(port)
-app = Flask(__name__, static_url_path=base_url+'static')
-
+#port = 12123
+#base_url = get_base_url(port)
+app = Flask(__name__)
 
 IMAGE_FOLDER=os.path.join('static','images')
 app.config['UPLOAD_FOLDER']=IMAGE_FOLDER
 
-
 # homepage 
-@app.route(base_url)
+@app.route('/')
 def home():
     return render_template('home.html')
 
 # request test and show the result 
-@app.route(base_url+"/result",methods=["GET","POST"])
+@app.route("/result",methods=["GET","POST"])
 @cross_origin()
 def result():
     if request.method=="POST":
@@ -39,7 +36,7 @@ def result():
 
 
 # request test and show the result 
-@app.route(base_url+"/count",methods=["GET","POST"])
+@app.route("/count",methods=["GET","POST"])
 @cross_origin()
 def count():
     if request.method=="POST":
